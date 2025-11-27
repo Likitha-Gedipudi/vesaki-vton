@@ -1,0 +1,70 @@
+# Dataset directories
+dataset/
+temp_downloads/
+
+# Model training artifacts
+checkpoints/
+logs/
+experiments/
+runs/
+wandb/
+tensorboard/
+*.pth
+*.pt
+*.ckpt
+
+# Training outputs
+results/
+outputs/
+visualizations/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environment
+venv/
+env/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs and Stats
+*.log
+scraping_stats.json
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Chrome driver
+chromedriver
+*.exe
+
+# Temporary files
+*.tmp
+temp_*
+

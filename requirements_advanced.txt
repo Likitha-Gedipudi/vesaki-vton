@@ -1,0 +1,39 @@
+# Advanced Virtual Try-On Dataset Builder Requirements
+# Install with: pip3 install -r requirements_advanced.txt
+
+# Core dependencies (from base requirements)
+opencv-python>=4.8.0
+Pillow>=10.0.0
+numpy>=1.24.0
+requests>=2.31.0
+aiohttp>=3.9.0
+selenium>=4.15.0
+undetected-chromedriver>=3.5.0
+tqdm>=4.66.0
+scikit-image>=0.21.0
+
+# Deep Learning Framework
+torch>=2.0.0
+torchvision>=0.15.0
+
+# Advanced Pose & Segmentation
+mediapipe>=0.10.9
+
+# Data Augmentation
+albumentations>=1.3.0
+imgaug>=0.4.0
+
+# Model Utilities
+timm>=0.9.0
+gdown>=4.7.0
+
+# Human Parsing (SCHP dependencies)
+scipy>=1.10.0
+matplotlib>=3.7.0
+
+# Quality Assessment
+scikit-learn>=1.3.0
+
+# Progress & Utilities
+colorama>=0.4.6
+

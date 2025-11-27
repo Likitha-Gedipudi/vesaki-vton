@@ -1,0 +1,36 @@
+# Google Shopping Product URLs - Optimized for More Person Images
+# Add one URL per line - Lines starting with # are ignored
+# TIP: Use "model wearing" or "woman wearing" keywords for more person images!
+
+# Women's Fashion with Models (High person image yield)
+https://www.google.com/search?q=woman+wearing+dress&tbm=shop&udm=28
+https://www.google.com/search?q=woman+wearing+top&tbm=shop&udm=28
+https://www.google.com/search?q=woman+wearing+blouse&tbm=shop&udm=28
+https://www.google.com/search?q=woman+wearing+sweater&tbm=shop&udm=28
+https://www.google.com/search?q=woman+wearing+cardigan&tbm=shop&udm=28
+https://www.google.com/search?q=woman+wearing+jacket&tbm=shop&udm=28
+https://www.google.com/search?q=woman+wearing+jeans&tbm=shop&udm=28
+https://www.google.com/search?q=woman+wearing+skirt&tbm=shop&udm=28
+https://www.google.com/search?q=woman+wearing+jumpsuit&tbm=shop&udm=28
+https://www.google.com/search?q=woman+wearing+pants&tbm=shop&udm=28
+
+# Model Photos
+https://www.google.com/search?q=model+wearing+casual+dress&tbm=shop&udm=28
+https://www.google.com/search?q=model+wearing+summer+dress&tbm=shop&udm=28
+https://www.google.com/search?q=model+wearing+tshirt&tbm=shop&udm=28
+https://www.google.com/search?q=model+wearing+shirt&tbm=shop&udm=28
+https://www.google.com/search?q=model+wearing+hoodie&tbm=shop&udm=28
+
+# Fashion Lookbook Style
+https://www.google.com/search?q=women+fashion+dress+model&tbm=shop&udm=28
+https://www.google.com/search?q=women+fashion+top+model&tbm=shop&udm=28
+https://www.google.com/search?q=women+outfit+jeans&tbm=shop&udm=28
+https://www.google.com/search?q=women+outfit+casual&tbm=shop&udm=28
+https://www.google.com/search?q=women+outfit+elegant&tbm=shop&udm=28
+
+# Additional Categories
+https://www.google.com/search?q=tops+for+women&udm=28
+https://www.google.com/search?q=dress+for+women&udm=28
+https://www.google.com/search?q=blouse+for+women&udm=28
+https://www.google.com/search?q=sweater+for+women&udm=shop&udm=28
+https://www.google.com/search?q=cardigan+women&tbm=shop&udm=28
