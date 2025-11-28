@@ -7,7 +7,8 @@ from .losses import (
     PerceptualLoss,
     StyleLoss,
     TotalVariationLoss,
-    CompositeLoss
+    CompositeLoss,
+    GMMSmoothnessLoss
 )
 
 __all__ = [
@@ -15,6 +16,7 @@ __all__ = [
     'PerceptualLoss',
     'StyleLoss',
     'TotalVariationLoss',
-    'CompositeLoss'
+    'CompositeLoss',
+    'GMMSmoothnessLoss'
 ]
 
