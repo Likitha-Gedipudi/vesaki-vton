@@ -1,0 +1,86 @@
+# Vesaki-VTON Training Configuration
+
+# Model Configuration
+model:
+  gmm:
+    input_nc: 22  # 18 (pose) + 1 (body_mask) + 3 (agnostic)
+    feature_dim: 512
+    num_points: 5  # 5x5 grid of control points
+  
+  tom:
+    input_nc: 9  # 3 (agnostic) + 3 (warped_garment) + 3 (person_repr)
+    output_nc: 4  # 3 (RGB) + 1 (composition_mask)
+
+# Training Configuration
+training:
+  # Stages
+  stage: "gmm"  # "gmm" or "tom" or "joint"
+  
+  # Hyperparameters
+  batch_size: 4
+  num_epochs_gmm: 30
+  num_epochs_tom: 70
+  learning_rate_gmm: 0.0001
+  learning_rate_tom: 0.0001
+  beta1: 0.5
+  beta2: 0.999
+  weight_decay: 0.0001
+  
+  # Learning rate schedule
+  lr_policy: "step"  # "step" or "plateau" or "cosine"
+  lr_decay_epochs: 10  # Decay every N epochs
+  lr_decay_gamma: 0.5  # Multiply LR by this factor
+  
+  # Warmup
+  warmup_epochs: 5
+  warmup_start_lr: 0.00001
+  
+  # Data
+  data_dir: "dataset"
+  num_workers: 4
+  pin_memory: true
+  
+  # Checkpointing
+  checkpoint_dir: "checkpoints"
+  save_epoch_freq: 5  # Save every N epochs
+  save_latest_freq: 1  # Save latest every N epochs
+  resume: ""  # Path to checkpoint to resume from
+  
+  # Logging
+  log_dir: "logs"
+  print_freq: 100  # Print every N iterations
+  tensorboard: true
+  
+  # Validation
+  val_epoch_freq: 5  # Validate every N epochs
+  num_val_samples: 10  # Number of validation images to save
+
+# Loss Configuration
+loss:
+  # GMM losses
+  gmm_l1_weight: 1.0
+  gmm_smoothness_weight: 0.1
+  
+  # TOM losses
+  tom_l1_weight: 1.0
+  tom_perceptual_weight: 1.0
+  tom_style_weight: 100.0
+  tom_tv_weight: 0.0001
+  
+  # Perceptual loss layers
+  perceptual_weights: [1.0, 1.0, 1.0, 1.0, 1.0]
+  style_weights: [1.0, 1.0, 1.0, 1.0, 1.0]
+
+# Hardware Configuration
+hardware:
+  gpu_ids: [0]  # List of GPU IDs to use
+  use_amp: true  # Use automatic mixed precision
+  cudnn_benchmark: true
+
+# Evaluation Configuration
+evaluation:
+  metrics: ["ssim", "psnr", "fid", "lpips"]
+  fid_batch_size: 50
+  save_images: true
+  save_dir: "results"
+
