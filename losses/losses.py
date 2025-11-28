@@ -36,7 +36,7 @@ class PerceptualLoss(nn.Module):
     Perceptual loss using VGG19 features
     """
     def __init__(self, weights=[1.0, 1.0, 1.0, 1.0, 1.0]):
-        super(Perceptual Loss, self).__init__()
+        super(PerceptualLoss, self).__init__()
         self.vgg = VGG19(requires_grad=False)
         self.criterion = nn.L1Loss()
         self.weights = weights
