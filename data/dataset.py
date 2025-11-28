@@ -129,11 +129,13 @@ class VITONDataset(Dataset):
         person_path = os.path.join(self.data_dir, 'person', person_name)
         garment_path = os.path.join(self.data_dir, 'garment', garment_name)
         
-        # Parse paths (need to handle _person suffix)
-        person_base = person_name.replace('.jpg', '')
+        # Parse paths (files already have _person suffix in their names)
+        person_base = person_name.replace('.jpg', '').replace('_person', '')
+        
+        # Annotation files have _person suffix
         parse_path = os.path.join(self.data_dir, 'person-parse', f'{person_base}_person.png')
         pose_json_path = os.path.join(self.data_dir, 'openpose', f'{person_base}_person_keypoints.json')
-        body_mask_path = os.path.join(self.data_dir, 'densepose', f'{person_base}_person.png')
+        body_mask_path = os.path.join(self.data_dir, 'densepose', f'{person_base}_person_mask.png')
         agnostic_path = os.path.join(self.data_dir, 'agnostic-mask', f'{person_base}_person.jpg')
         
         # Load images
