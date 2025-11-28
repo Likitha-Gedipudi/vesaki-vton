@@ -1,0 +1,51 @@
+# Git
+.git
+.gitignore
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+
+# Virtual environments
+venv/
+env/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs and datasets (mount as volumes instead)
+logs/
+dataset/
+checkpoints/
+results/
+experiments/
+wandb/
+tensorboard/
+
+# Temporary files
+*.tmp
+temp_*
+.DS_Store
+Thumbs.db
+
+# Large model files (download in container)
+models/*.pth
+
+# Documentation
+*.md
+docs/
+archive/
+
+# CI/CD
+.github/
+

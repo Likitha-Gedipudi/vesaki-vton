@@ -1,0 +1,98 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vesaki-vton
+  labels:
+    app: vesaki-vton
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: vesaki-vton
+  template:
+    metadata:
+      labels:
+        app: vesaki-vton
+    spec:
+      containers:
+      - name: vesaki-vton
+        image: vesaki-vton:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8000
+          name: http
+        env:
+        - name: CUDA_VISIBLE_DEVICES
+          value: "0"
+        resources:
+          requests:
+            memory: "4Gi"
+            cpu: "2"
+            nvidia.com/gpu: "1"
+          limits:
+            memory: "8Gi"
+            cpu: "4"
+            nvidia.com/gpu: "1"
+        volumeMounts:
+        - name: checkpoints
+          mountPath: /app/checkpoints
+        - name: models
+          mountPath: /app/models
+        livenessProbe:
+          httpGet:
+            path: /api/v1/health
+            port: 8000
+          initialDelaySeconds: 60
+          periodSeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /api/v1/health
+            port: 8000
+          initialDelaySeconds: 30
+          periodSeconds: 10
+      volumes:
+      - name: checkpoints
+        persistentVolumeClaim:
+          claimName: vesaki-checkpoints-pvc
+      - name: models
+        persistentVolumeClaim:
+          claimName: vesaki-models-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: vesaki-vton-service
+spec:
+  selector:
+    app: vesaki-vton
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8000
+  type: LoadBalancer
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: vesaki-vton-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: vesaki-vton
+  minReplicas: 2
+  maxReplicas: 10
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 70
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: Utilization
+        averageUtilization: 80
+

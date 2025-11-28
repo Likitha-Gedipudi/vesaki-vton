@@ -1,0 +1,105 @@
+version: '3.8'
+
+services:
+  # Main API service
+  vesaki-vton:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: application
+    container_name: vesaki-vton-api
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./checkpoints:/app/checkpoints
+      - ./dataset:/app/dataset
+      - ./logs:/app/logs
+      - ./results:/app/results
+    environment:
+      - CUDA_VISIBLE_DEVICES=-1  # CPU only, change to 0 for GPU
+    restart: unless-stopped
+    networks:
+      - vesaki-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/v1/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Nginx reverse proxy
+  nginx:
+    image: nginx:alpine
+    container_name: vesaki-nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./deployment/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./deployment/ssl:/etc/nginx/ssl:ro
+    depends_on:
+      - vesaki-vton
+    restart: unless-stopped
+    networks:
+      - vesaki-network
+
+  # Redis cache (optional)
+  redis:
+    image: redis:7-alpine
+    container_name: vesaki-redis
+    ports:
+      - "6379:6379"
+    command: redis-server --appendonly yes
+    volumes:
+      - redis-data:/data
+    restart: unless-stopped
+    networks:
+      - vesaki-network
+
+  # Prometheus monitoring
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: vesaki-prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./deployment/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus-data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+    restart: unless-stopped
+    networks:
+      - vesaki-network
+
+  # Grafana dashboards
+  grafana:
+    image: grafana/grafana:latest
+    container_name: vesaki-grafana
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana-data:/var/lib/grafana
+      - ./deployment/grafana-dashboards:/etc/grafana/provisioning/dashboards:ro
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_USERS_ALLOW_SIGN_UP=false
+    depends_on:
+      - prometheus
+    restart: unless-stopped
+    networks:
+      - vesaki-network
+
+volumes:
+  redis-data:
+  prometheus-data:
+  grafana-data:
+
+networks:
+  vesaki-network:
+    driver: bridge
+
+
+# GPU-enabled compose file (docker-compose.gpu.yml)
+# Use with: docker-compose -f docker-compose.yml -f docker-compose.gpu.yml up
+

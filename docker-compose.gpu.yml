@@ -1,0 +1,19 @@
+# GPU override for docker-compose
+# Usage: docker-compose -f docker-compose.yml -f docker-compose.gpu.yml up
+
+version: '3.8'
+
+services:
+  vesaki-vton:
+    build:
+      target: gpu-application
+    environment:
+      - CUDA_VISIBLE_DEVICES=0
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+

@@ -1,0 +1,21 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  # Prometheus self-monitoring
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+
+  # Vesaki-VTON API metrics (if implemented)
+  - job_name: 'vesaki-vton'
+    static_configs:
+      - targets: ['vesaki-vton:8000']
+    metrics_path: '/metrics'
+
+  # Nginx metrics (requires nginx-prometheus-exporter)
+  - job_name: 'nginx'
+    static_configs:
+      - targets: ['nginx-exporter:9113']
+
