@@ -19,15 +19,17 @@ class GeometricMatchingModule(nn.Module):
     3. Regression network to predict TPS parameters
     4. Grid generation and warping
     """
-    def __init__(self, input_nc=3, feature_dim=512, num_points=5):
+    def __init__(self, input_nc=22, feature_dim=512, num_points=5):
         super(GeometricMatchingModule, self).__init__()
         
         self.num_points = num_points
         self.feature_dim = feature_dim
         
         # Feature extraction networks
+        # Person representation has many channels (pose + mask + agnostic)
         self.feature_extraction_person = FeatureExtraction(input_nc=input_nc, ngf=64, n_layers=4)
-        self.feature_extraction_garment = FeatureExtraction(input_nc=input_nc, ngf=64, n_layers=4)
+        # Garment is just RGB (3 channels)
+        self.feature_extraction_garment = FeatureExtraction(input_nc=3, ngf=64, n_layers=4)
         
         # Correlation layer
         self.correlation = CorrelationLayer(in_channels=feature_dim, max_displacement=4)
