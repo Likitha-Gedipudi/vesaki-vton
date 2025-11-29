@@ -68,3 +68,4 @@ chromedriver
 *.tmp
 temp_*
 
+node_modules
