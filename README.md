@@ -549,7 +549,7 @@ Based on similar architectures (VITON-HD, HR-VITON):
 - [x] Quality filtering and validation
 - [x] Dataset export and metadata generation
 
-### Phase 2: Model Training (COMPLETED)
+### Phase 2: Model Training (IN PROGRESS)
 - [ ] Implement GMM architecture
 - [ ] Implement TOM architecture
 - [ ] Create training pipeline
@@ -559,7 +559,7 @@ Based on similar architectures (VITON-HD, HR-VITON):
 - [ ] Validation and evaluation metrics
 - [ ] Hyperparameter tuning
 
-### Phase 3: Inference & API (COMPLETED)
+### Phase 3: Inference & API (IN PROGRESS)
 - [ ] Inference script for single images
 - [ ] Batch processing support
 - [ ] REST API implementation (FastAPI)
